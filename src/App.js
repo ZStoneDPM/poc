@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistor, store } from './store';
 import useAsync from 'redux-persist/lib/storage';
-import { BrowserRouter as Router } from 'react-router-dom';
+import Routing from './Router';
 
 class App extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ renderLoading = () => (
       <Provider store={store} className="App">
       <PersistGate loading={this.renderLoading()} persistor={persistor}>
         <div style={styles.root} >  
-          <Router style={styles.root}/>
+          <Routing />
         </div>
       </PersistGate>
     </Provider>
@@ -62,19 +62,21 @@ renderLoading = () => (
   } 
   const styles = {
     root: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
-      overflow: 'auto',
-      scrollBehavior: 'smooth',
+      display: 'flex',
+      flexDirection: 'row'
+      // position: 'absolute',
+      // left: 0,
+      // right: 0,
+      // top: 0,
+      // bottom: 0,
+      // overflow: 'auto',
+      // scrollBehavior: 'smooth',
       // transition: 'all 0.9s ease-out 0s',
       // backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: 'cover',
-      backgroundColor: 'aqua',
-      backgroundPosition: 'center',
-      zIndex: -1000,
+      // backgroundSize: 'cover',
+      // backgroundColor: 'aqua',
+      // backgroundPosition: 'center',
+      // zIndex: -1000,
       // position: 'absolute',
       // left: 0,
       // right: 0,

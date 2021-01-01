@@ -1,0 +1,8 @@
+import LandingPage from "./LandingPage";
+
+LandingPage.js
+
+console.log('sm height: '+sideHeight);
+console.log('sm scrollwidth: '+sideWidth);
+console.log('main height: '+mainHeight);
+console.log('main scrollwidth: '+mainWidth);
