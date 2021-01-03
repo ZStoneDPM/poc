@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { isBrowser } from 'react-device-detect';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import reactNativeImage from "../Assets/statejs.png";
+// import reactNativeImage from "../Assets/statejs.png";
 
 class MainContent extends Component {
   // constructor(props) {
@@ -120,7 +120,7 @@ class MainContent extends Component {
             </a>
           </em>
           </div>
-          <img src={reactNativeImage} alt="image1" style={styles.images} />
+          {/* <img src={reactNativeImage} alt="image1" style={styles.images} /> */}
         
       </div>
     );
