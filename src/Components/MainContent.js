@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { isBrowser } from 'react-device-detect';
+import { isBrowser } from 'react-device-detect';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import reactNativeImage from "../Assets/statejs.png";
@@ -24,7 +24,7 @@ class MainContent extends Component {
       },
       images: {
         height: "auto",
-        width: this.props.user.contentBodyWidth,//minus padding
+        width: isBrowser ? this.props.user.contentBodyWidth : '100%',//minus padding
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
       },
