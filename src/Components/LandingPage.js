@@ -81,7 +81,7 @@ class LandingPage extends Component {
           left: isBrowser ? 'inherit' : '12px',
           bottom: isBrowser ? 'inherit' : '12px',
           top: isBrowser ? 'inherit' : '12px',
-          padding: isBrowser ? 'inherit' : '25px',
+          // padding: isBrowser ? 'inherit' : '25px',
           paddingTop: 0,
           display: this.props.user.showLeftMenu ? 'block' : 'none'
         },
