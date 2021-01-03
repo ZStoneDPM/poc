@@ -25,20 +25,6 @@ export const updateShowLeftMenu = showLeftMenu => ({
   showLeftMenu
 });
 
-// import { PURGE, REHYDRATE } from 'redux-persist';
-
-// function myReducer(state = {}, action) { 
-//      switch(action.type) { 
-//           // [....Your other reducer actions...]  
-//            REHYDRATE:    // This added just to show that this action type also exists, can be omitted. 
-//                   console.log("REHYDRATING!!!!");    
-//                   return state;
-//            PURGE: 
-//                   console.log("PURGING!!!!"); 
-//                   return {};    // Return the initial state of this reducer to 'reset' the app 
-//      }
-// }
-
 const initialState = { 
   phoneNotch: 0,
   phoneNotchChecked: false,

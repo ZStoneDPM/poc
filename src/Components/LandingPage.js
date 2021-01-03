@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { updateShowLeftMenu } from '../reducers/user';
-import { isBrowser, isMobile } from 'react-device-detect';
+import { updateShowLeftMenu, updateContentBodyWidth } from '../reducers/user';
+import { isBrowser } from 'react-device-detect';
 import MainMenu from './MainMenu';
 import MainContent from './MainContent';
 import LeftMenuHeader from './LeftMenuHeader';
@@ -22,25 +22,32 @@ class LandingPage extends Component {
   }
 
   checkPageWidth(){
-    var sideHeight = document.getElementById('side-menu').scrollHeight;
-    var sideWidth = document.getElementById('side-menu').scrollWidth;
-    var mainHeight = document.getElementById('main-content').scrollHeight;
-    var mainWidth = document.getElementById('main-content').scrollWidth;
-    //var scrollRightBarMargin = (isBrowser) && (sideHeight > window.innerHeight) ? 18 :  0;
+    const sideHeight = document.getElementById('side-menu').scrollHeight;
+    const sideWidth = document.getElementById('side-menu').scrollWidth;
+    const mainHeight = document.getElementById('main-content').scrollHeight;
+    const mainWidth = document.getElementById('main-content').offsetWidth;
+    //const scrollRightBarMargin = (isBrowser) && (sideHeight > window.innerHeight) ? 18 :  0;
     console.log('sm height: '+sideHeight);
     console.log('sm scrollwidth: '+sideWidth);
     console.log('main height: '+mainHeight);
     console.log('main scrollwidth: '+mainWidth);
-    //this.setState({ scrollRightBarMargin: scrollRightBarMargin });
-    // this.props.dispatch(updateRightScrollBarMargin(scrollRightBarMargin));
+    this.props.dispatch(updateContentBodyWidth(mainWidth));
+  //  this.props.dispatch(updateSidemenuBodyWidth(windowWidth));
   }
 
-    toggleMenu = (value) => {
-      if(value===true){ value = false } else { value = true}
-      this.setState({ showLeftMenu: value });
-       this.props.dispatch(updateShowLeftMenu(value));
+  toggleMenu = (value) => {
+    if(value===true){ value = false } else { value = true}// toggle true/false
+    this.setState({ showLeftMenu: value });
+     this.props.dispatch(updateShowLeftMenu(value));
 
-    }
+     //document.getEle was faster than dom restart so added timeout for update width
+     setTimeout(() => {
+      const mainWidth = document.getElementById('main-content').offsetWidth;
+      this.props.dispatch(updateContentBodyWidth(mainWidth));
+      console.log('new width: '+this.props.user.contentBodyWidth);
+     }, 500);
+     
+  }
 
   componentDidMount() {
     this.checkPageWidth();
@@ -60,8 +67,8 @@ class LandingPage extends Component {
 
     // this.props.dispatch(updateBackgrounColor(pageColors));
     window.addEventListener("resize", this.checkPageWidth.bind(this));
-    // document.addEventListener('clicked', this.checkMenuHeight.bind(this));
-    // document.addEventListener("DOMContentLoaded", this.checkFunctions.bind(this));
+    document.addEventListener('clicked', this.checkPageWidth.bind(this));
+    document.addEventListener("DOMContentLoaded", this.checkPageWidth.bind(this));
   }
 
     // state = {
@@ -87,9 +94,10 @@ class LandingPage extends Component {
         },
         RightContent: {
           backgroundColor: this.state.backgroundColor.offwhite,
-          height: '100vh',
+          // height: '100vh',
           flex: isBrowser ? '1' : 'none',
-          width: isMobile ? '100%' : 'inherit'
+          width: isBrowser ? this.props.user.contentBodyWidth - 50: this.props.user.contentBodyWidth,//minus padding
+          overflow: 'hidden'
         },
         TopItems: {
           display: 'flex',
