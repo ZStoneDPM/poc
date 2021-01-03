@@ -10,7 +10,9 @@ class MainContent extends Component {
     render() {
     
       const styles = {  
-      
+        MainContent: {
+          padding: 10
+        }
      };
         return (
             <div className="MainContent" style={styles.MainContent}>

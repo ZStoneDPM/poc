@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-// import { updateLeftScrollBarMargin, updateRightScrollBarMargin, updateBackgrounColor, updateSidemenuBodyWidth, updateContentBodyWidth, updateIconWidthMultiplier } from '../reducers/user';
+import { updateShowLeftMenu } from '../reducers/user';
 import { isBrowser, isMobile } from 'react-device-detect';
 import MainMenu from './MainMenu';
 import MainContent from './MainContent';
@@ -17,6 +17,7 @@ class LandingPage extends Component {
         // switchValue: this.props.user.switchValue || false, //username to switchValue
         sideMenuWidth: this.props.user.sideMenuWidth,
         backgroundColor: {},
+        showLeftMenu: this.props.user.showLeftMenu,
     };
   }
 
@@ -34,10 +35,12 @@ class LandingPage extends Component {
     // this.props.dispatch(updateRightScrollBarMargin(scrollRightBarMargin));
   }
 
-  getWidth(){
-    var mainWidth = document.getElementById('main-content').scrollWidth;
-    return mainWidth;
-  }
+    toggleMenu = (value) => {
+      if(value===true){ value = false } else { value = true}
+      this.setState({ showLeftMenu: value });
+       this.props.dispatch(updateShowLeftMenu(value));
+
+    }
 
   componentDidMount() {
     this.checkPageWidth();
@@ -78,7 +81,9 @@ class LandingPage extends Component {
           left: isBrowser ? 'inherit' : '12px',
           bottom: isBrowser ? 'inherit' : '12px',
           top: isBrowser ? 'inherit' : '12px',
-          padding: isBrowser ? 'inherit' : '25px'
+          padding: isBrowser ? 'inherit' : '25px',
+          paddingTop: 0,
+          display: this.props.user.showLeftMenu ? 'block' : 'none'
         },
         RightContent: {
           backgroundColor: this.state.backgroundColor.offwhite,
@@ -99,7 +104,7 @@ class LandingPage extends Component {
         return (
           <Fragment>
             <div className="LeftContent" style={styles.LeftContent} id="side-menu">
-              <div className="TopItems" style={styles.TopItems}>
+              <div className="TopItems" style={styles.TopItems} onClick={() => this.toggleMenu(this.props.user.showLeftMenu)}>
                 <LeftMenuHeader />
                 <FontAwesomeIcon
                   icon={faWindowClose}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from 'react-redux';
+import { updateShowLeftMenu } from '../reducers/user';
 import { Link } from "react-router-dom";
 import {
   faBars,
@@ -9,7 +10,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 class MainMenu extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+       showLeftMenu: this.props.user.showLeftMenu,
+    };
+  }
+
+  toggleMenu = (value) => {
+    if(value===true){ value = false } else { value = true}
+    this.setState({ showLeftMenu: value });
+     this.props.dispatch(updateShowLeftMenu(value));
+
+  }
 
   render() {
     const pageColors = {
@@ -39,11 +52,13 @@ class MainMenu extends Component {
       },
   };
 
+
+
     return (
       <div className="MainMenuStyle" style={styles.MainMenuStyle}>
        
           {/* {this.state.sideMenuWidth <= 60 && ( */}
-            <div className="icon" onClick={() => this.extendMenuView()}>
+            <div className="icon" onClick={() => this.toggleMenu()}>
               <FontAwesomeIcon
                 icon={faBars}
                 color={iconStyle.color}
@@ -56,7 +71,7 @@ class MainMenu extends Component {
             <div
               //  to=''
               className="icon"
-              onClick={() => this.extendMenuView()}
+              onClick={() => this.toggleMenu()}
             >
               <FontAwesomeIcon
                 icon={faChevronLeft}
