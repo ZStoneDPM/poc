@@ -25,6 +25,7 @@ class MainContent extends Component {
       images: {
         height: "auto",
         width: isBrowser ? this.props.user.contentBodyWidth : '100%',//minus padding
+        maxWidth: window.innerWidth,
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
       },
