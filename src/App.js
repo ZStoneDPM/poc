@@ -63,26 +63,20 @@ renderLoading = () => (
   const styles = {
     root: {
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
       // position: 'absolute',
       // left: 0,
       // right: 0,
       // top: 0,
       // bottom: 0,
-      // overflow: 'auto',
-      // scrollBehavior: 'smooth',
-      // transition: 'all 0.9s ease-out 0s',
+      overflow: 'auto',
+      scrollBehavior: 'smooth',
+      transition: 'all 0.9s ease-out 0s',
       // backgroundImage: `url(${backgroundImage})`,
       // backgroundSize: 'cover',
       // backgroundColor: 'aqua',
       // backgroundPosition: 'center',
       // zIndex: -1000,
-      // position: 'absolute',
-      // left: 0,
-      // right: 0,
-      // top: 0,
-      // bottom: 0, 
-      // overflow: 'scroll'
     }
   };
 
