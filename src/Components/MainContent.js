@@ -16,16 +16,16 @@ class MainContent extends Component {
   render() {
     const styles = {
       MainContent: {
-        
+        maxWidth: window.visualViewport.width,//window.innerWidth,
       },
       Paragraph: {
-        // maxWidth: window.innerHeight,
+        maxWidth: window.visualViewport.width - 50,//minus padding both sides
         padding: 25,
       },
       images: {
         height: "auto",
         width: isBrowser ? this.props.user.contentBodyWidth : '100%',//minus padding
-        maxWidth: window.innerWidth,
+        maxWidth: window.visualViewport.width,//window.innerWidth,
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
       },

@@ -55,7 +55,8 @@ class MainMenu extends Component {
         display: 'flex',
         transition: 'all 0.9s ease-out',
         opacity: 1,
-        zIndex: 10
+        zIndex: 10,
+        maxWidth: window.innerWidth - 20,//minus padding //window.visualViewport.width,
       },
   };
 
