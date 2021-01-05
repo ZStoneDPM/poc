@@ -25,10 +25,17 @@ class MainContent extends Component {
       images: {
         height: "auto",
         width: isBrowser ? this.props.user.contentBodyWidth : '100%',//minus padding
-        maxWidth: window.visualViewport.width,//window.innerWidth,
+        maxWidth: isBrowser ? 600 : window.visualViewport.width,//window.innerWidth,
+        padding: isBrowser ? 10 : 'inherit',
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
       },
+      centeredTextAndImage: {
+        display: 'grid',
+        justifyContent: 'center',
+        textAlign: 'center',
+        fontSize: isBrowser ? 'inherit' : '.75rem'
+      }
     };
     return (
       <div className="MainContent" style={styles.MainContent}>
@@ -105,6 +112,10 @@ class MainContent extends Component {
             </a>
           </section>
           <p></p>
+        
+          </div>
+
+<div style={styles.centeredTextAndImage}>
           <em>
             Mobile development frameworks popularity. Source:
             <a href="https://2018.stateofjs.com/mobile-and-desktop/overview/">
@@ -119,9 +130,8 @@ class MainContent extends Component {
               State of JS 2019.
             </a>
           </em>
-          </div>
           <img src={reactNativeImage} alt="image1" style={styles.images} />
-        
+          </div>
       </div>
     );
   }
