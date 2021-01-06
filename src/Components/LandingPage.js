@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { updateShowLeftMenu, updateContentBodyWidth } from '../reducers/user';
+import { updateShowLeftMenu, updateContentBodyWidth, updateSidemenuBodyWidth } from '../reducers/user';
 import { isBrowser } from 'react-device-detect';
 import MainMenu from './MainMenu';
 import MainContent from './MainContent';
@@ -32,13 +32,20 @@ class LandingPage extends Component {
     console.log('main height: '+mainHeight);
     console.log('main scrollwidth: '+mainWidth);
     this.props.dispatch(updateContentBodyWidth(mainWidth));
-  //  this.props.dispatch(updateSidemenuBodyWidth(windowWidth));
+    this.props.dispatch(updateSidemenuBodyWidth(sideWidth));
   }
 
   toggleMenu = (value) => {
     if(value===true){ value = false } else { value = true}// toggle true/false
     this.setState({ showLeftMenu: value });
      this.props.dispatch(updateShowLeftMenu(value));
+
+       //document.getEle was faster than dom restart so added timeout for update width
+       setTimeout(() => {
+        const sideWidth = document.getElementById('side-menu').scrollWidth;
+        this.props.dispatch(updateSidemenuBodyWidth(sideWidth));
+        console.log('new width: '+this.props.user.contentBodyWidth);
+       }, 500);
 
      //document.getEle was faster than dom restart so added timeout for update width
      setTimeout(() => {
@@ -83,21 +90,26 @@ class LandingPage extends Component {
           height: isBrowser ? '100vh' : 'none',
           width: isBrowser ? '30%' : 'none',
           minWidth: 200,
-          position: isBrowser ? 'inherit' : 'absolute',
+         
           right: isBrowser ? 'inherit' : '12px',
           left: isBrowser ? 'inherit' : '12px',
           bottom: isBrowser ? 'inherit' : '12px',
           top: isBrowser ? 'inherit' : '12px',
           // padding: isBrowser ? 'inherit' : '25px',
           paddingTop: 0,
-          display: this.props.user.showLeftMenu ? 'block' : 'none'
+          display: this.props.user.showLeftMenu ? 'block' : 'none',
+          zIndex: 100,
+          position: isBrowser ? 'fixed' : 'fixed',
+          
         },
         RightContent: {
           backgroundColor: this.state.backgroundColor.offwhite,
           // height: '100vh',
           flex: isBrowser ? '1' : 'none',
           width: isBrowser ? this.props.user.contentBodyWidth - 50: this.props.user.contentBodyWidth,//minus padding
-          overflow: 'hidden'
+          overflow: 'hidden',
+          paddingTop: 50, //menu height
+          paddingLeft: this.props.user.sideMenuBodyWidth, // left menu width
         },
         TopItems: {
           display: 'flex',

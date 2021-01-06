@@ -16,7 +16,7 @@ class MainContent extends Component {
   render() {
     const styles = {
       MainContent: {
-        maxWidth: window.visualViewport.width,//window.innerWidth,
+        maxWidth: window.visualViewport.width - this.props.user.sideMenuBodyWidth,//window.innerWidth,
       },
       Paragraph: {
         maxWidth: window.visualViewport.width - 50,//minus padding both sides
@@ -25,7 +25,7 @@ class MainContent extends Component {
       images: {
         height: "auto",
         width: isBrowser ? this.props.user.contentBodyWidth : '100%',//minus padding
-        maxWidth: isBrowser ? 600 : window.visualViewport.width,//window.innerWidth,
+        maxWidth: isBrowser ? 640 - this.props.user.sideMenuBodyWidth : window.visualViewport.width,//window.innerWidth,
         padding: isBrowser ? 10 : 'inherit',
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",

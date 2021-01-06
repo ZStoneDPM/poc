@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from 'react-redux';
-import { updateShowLeftMenu, updateContentBodyWidth } from '../reducers/user';
+import { updateShowLeftMenu, updateContentBodyWidth, updateSidemenuBodyWidth } from '../reducers/user';
 import { Link } from "react-router-dom";
 import {
   faBars,
@@ -21,6 +21,13 @@ class MainMenu extends Component {
     if(value===true){ value = false } else { value = true}// toggle true/false
     this.setState({ showLeftMenu: value });
      this.props.dispatch(updateShowLeftMenu(value));
+
+       //document.getEle was faster than dom restart so added timeout for update width
+       setTimeout(() => {
+        const sideWidth = document.getElementById('side-menu').scrollWidth;
+        this.props.dispatch(updateSidemenuBodyWidth(sideWidth));
+        console.log('new width: '+this.props.user.contentBodyWidth);
+       }, 500);
 
      //document.getEle was faster than dom restart so added timeout for update width
      setTimeout(() => {
@@ -57,6 +64,10 @@ class MainMenu extends Component {
         opacity: 1,
         zIndex: 10,
         maxWidth: window.innerWidth - 20,//minus padding //window.visualViewport.width,
+        position: 'fixed',
+        left: 0,
+        right: 0,
+        top: 0,
       },
   };
 

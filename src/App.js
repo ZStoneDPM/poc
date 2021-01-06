@@ -69,6 +69,7 @@ renderLoading = () => (
       // right: 0,
       // top: 0,
       // bottom: 0,
+      overflow: 'hidden',
       // overflow: 'auto',
       // scrollBehavior: 'smooth',
       // transition: 'all 0.9s ease-out 0s',
