@@ -16,25 +16,29 @@ class MainContent extends Component {
   render() {
     const styles = {
       MainContent: {
-        maxWidth: window.visualViewport.width - this.props.user.sideMenuBodyWidth,//window.innerWidth,
+        maxWidth: isBrowser ? window.visualViewport.width - this.props.user.sideMenuBodyWidth : window.innerWidth,
+        transition: 'all 0.3s ease-out',
       },
       Paragraph: {
         maxWidth: window.visualViewport.width - 50,//minus padding both sides
         padding: 25,
+        transition: 'all 0.3s ease-out',
       },
       images: {
         height: "auto",
-        width: isBrowser ? this.props.user.contentBodyWidth : '100%',//minus padding
-        maxWidth: isBrowser ? 640 - this.props.user.sideMenuBodyWidth : window.visualViewport.width,//window.innerWidth,
+        width: isBrowser ? ((window.visualViewport.width * .7) - this.props.user.sideMenuBodyWidth) : '100%',//minus padding
+        // maxWidth: isBrowser ? 640 - this.props.user.sideMenuBodyWidth : window.visualViewport.width,//window.innerWidth,
         padding: isBrowser ? 10 : 'inherit',
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
+        transition: 'all 0.3s ease-out',
       },
       centeredTextAndImage: {
         display: 'grid',
         justifyContent: 'center',
         textAlign: 'center',
-        fontSize: isBrowser ? 'inherit' : '.75rem'
+        fontSize: isBrowser ? 'inherit' : '.75rem',
+        transition: 'all 0.3s ease-out',
       }
     };
     return (

@@ -8,6 +8,7 @@ import {
   faCog,
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import { isBrowser } from "react-device-detect";
 
 class MainMenu extends Component {
   constructor(props) {
@@ -24,17 +25,23 @@ class MainMenu extends Component {
 
        //document.getEle was faster than dom restart so added timeout for update width
        setTimeout(() => {
-        const sideWidth = document.getElementById('side-menu').scrollWidth;
+        // let sideWidth = document.getElementById('side-menu').scrollWidth;
+        let sideWidth = "";
+        if(this.props.user.showLeftMenu === false){
+          sideWidth = 0;
+        } else {
+          sideWidth = window.visualViewport.width * .3;
+        }
         this.props.dispatch(updateSidemenuBodyWidth(sideWidth));
         console.log('new width: '+this.props.user.contentBodyWidth);
-       }, 500);
+       }, 50);
 
      //document.getEle was faster than dom restart so added timeout for update width
      setTimeout(() => {
       const mainWidth = document.getElementById('main-content').offsetWidth;
       this.props.dispatch(updateContentBodyWidth(mainWidth));
       console.log('new width: '+this.props.user.contentBodyWidth);
-     }, 500);
+     }, 50);
      
   }
 
@@ -60,14 +67,14 @@ class MainMenu extends Component {
         elevation: 2,
         padding: 10,
         display: 'flex',
-        transition: 'all 0.9s ease-out',
         opacity: 1,
         zIndex: 10,
-        maxWidth: window.innerWidth - 20,//minus padding //window.visualViewport.width,
+        width: isBrowser ? window.innerWidth - 20 - this.props.user.sideMenuBodyWidth : window.visualViewport.width -20,//minus padding //window.visualViewport.width,
         position: 'fixed',
-        left: 0,
+        left: isBrowser ? this.props.user.sideMenuBodyWidth : 0,
         right: 0,
         top: 0,
+        transition: 'all 0.3s ease-out',
       },
   };
 
@@ -77,7 +84,10 @@ class MainMenu extends Component {
       <div className="MainMenuStyle" style={styles.MainMenuStyle}>
        
           {/* {this.state.sideMenuWidth <= 60 && ( */}
-            <div className="icon" onClick={() => this.toggleMenu()}>
+            <div 
+              className="icon" 
+              onClick={() => this.toggleMenu()}
+              >
               <FontAwesomeIcon
                 icon={faBars}
                 color={iconStyle.color}

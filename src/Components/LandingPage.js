@@ -45,14 +45,14 @@ class LandingPage extends Component {
         const sideWidth = document.getElementById('side-menu').scrollWidth;
         this.props.dispatch(updateSidemenuBodyWidth(sideWidth));
         console.log('new width: '+this.props.user.contentBodyWidth);
-       }, 500);
+       }, 50);
 
      //document.getEle was faster than dom restart so added timeout for update width
      setTimeout(() => {
       const mainWidth = document.getElementById('main-content').offsetWidth;
       this.props.dispatch(updateContentBodyWidth(mainWidth));
       console.log('new width: '+this.props.user.contentBodyWidth);
-     }, 500);
+     }, 50);
      
   }
 
@@ -88,9 +88,8 @@ class LandingPage extends Component {
         LeftContent: {
           backgroundColor: this.state.backgroundColor.blue,
           height: isBrowser ? '100vh' : 'none',
-          width: isBrowser ? '30%' : 'none',
+          width: isBrowser && this.props.user.showLeftMenu ? '30%' : 'none',
           minWidth: 200,
-         
           right: isBrowser ? 'inherit' : '12px',
           left: isBrowser ? 'inherit' : '12px',
           bottom: isBrowser ? 'inherit' : '12px',
@@ -98,8 +97,10 @@ class LandingPage extends Component {
           // padding: isBrowser ? 'inherit' : '25px',
           paddingTop: 0,
           display: this.props.user.showLeftMenu ? 'block' : 'none',
+          // opacity: this.props.user.showLeftMenu ? 1 : 0.2,
           zIndex: 100,
           position: isBrowser ? 'fixed' : 'fixed',
+          transition: 'all 0.3s ease-out opacity 0.3s ease-out',
           
         },
         RightContent: {
@@ -109,7 +110,8 @@ class LandingPage extends Component {
           width: isBrowser ? this.props.user.contentBodyWidth - 50: this.props.user.contentBodyWidth,//minus padding
           overflow: 'hidden',
           paddingTop: 50, //menu height
-          paddingLeft: this.props.user.sideMenuBodyWidth, // left menu width
+          paddingLeft: isBrowser ? this.props.user.sideMenuBodyWidth : 'inherit', // left menu width
+          transition: 'all 0.3s ease-out',
         },
         TopItems: {
           display: 'flex',
@@ -117,7 +119,8 @@ class LandingPage extends Component {
           justifyContent: 'space-between',
           padding: 10,
           alignItems: 'center',
-          paddingRight: 10
+          paddingRight: 10,
+          transition: 'all 0.3s ease-out',
         }
       };
        
