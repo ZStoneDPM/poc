@@ -69,7 +69,7 @@ class MainMenu extends Component {
         display: 'flex',
         opacity: 1,
         zIndex: 10,
-        width: isBrowser ? window.innerWidth - 20 - this.props.user.sideMenuBodyWidth : window.visualViewport.width -20,//minus padding //window.visualViewport.width,
+        width: isBrowser ? window.innerWidth - this.props.user.sideMenuBodyWidth - 38: window.visualViewport.width -20,//minus padding //window.visualViewport.width,
         position: 'fixed',
         left: isBrowser ? this.props.user.sideMenuBodyWidth : 0,
         right: 0,
