@@ -2,12 +2,12 @@ import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { updateShowLeftMenu, updateContentBodyWidth, updateSidemenuBodyWidth } from '../reducers/user';
+import { updateShowLeftMenu, updateContentBodyWidth, updateSidemenuBodyWidth } from '../../redux/user';
 import { isBrowser } from 'react-device-detect';
-import MainMenu from './MainMenu';
-import MainContent from './MainContent';
-import LeftMenuHeader from './LeftMenuHeader';
-import LeftMenuContent from './LeftMenuContent';
+import MainMenu from '../right-content/MainMenu';
+import MainContent from '../right-content/MainContent';
+import LeftMenuHeader from '../left-menu/LeftMenuHeader';
+import LeftMenuContent from '../left-menu/LeftMenuContent';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -107,7 +107,7 @@ class LandingPage extends Component {
           backgroundColor: this.state.backgroundColor.offwhite,
           // height: '100vh',
           flex: isBrowser ? '1' : 'none',
-          width: isBrowser ? this.props.user.contentBodyWidth - 50: this.props.user.contentBodyWidth,//minus padding
+          width: isBrowser ? this.props.user.contentBodyWidth - 50: '',//minus padding
           overflow: 'hidden',
           paddingTop: 50, //menu height
           paddingLeft: isBrowser ? this.props.user.sideMenuBodyWidth : 'inherit', // left menu width

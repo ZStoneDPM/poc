@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from 'react-redux';
-import { updateShowLeftMenu, updateContentBodyWidth, updateSidemenuBodyWidth } from '../reducers/user';
+import { updateShowLeftMenu, updateContentBodyWidth, updateSidemenuBodyWidth } from '../../redux/user';
 import { Link } from "react-router-dom";
 import {
   faBars,

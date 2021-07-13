@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 //import useAsync from 'react-async';
 
-import rootReducer from '../reducers'; // the value from combineReducers
+import rootReducer from '../redux'; // the value from combineReducers
 // const STORAGE = get(window, 'localStorage', ''); // GOOD
 const persistConfig = {
  key: 'root',
